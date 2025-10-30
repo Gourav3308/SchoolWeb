@@ -3,7 +3,8 @@ server {
     listen       [::]:${PORT};
     server_name  _;
 
-    root   /usr/share/nginx/html;
+    # Angular v17+ outputs app under 'browser' folder
+    root   /usr/share/nginx/html/browser;
     index  index.html;
 
     location / {
