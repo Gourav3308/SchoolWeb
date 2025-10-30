@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: schoolweb-backend
+    env: docker
+    plan: free
+    rootDir: backend
+    dockerfilePath: backend/Dockerfile
+    autoDeploy: true
+    healthCheckPath: /health
+    envVars:
+      - key: JAVA_OPTS
+        value: ""
+      # Add DB or mail envs here if needed
+
+  - type: web
+    name: schoolweb-frontend
+    env: docker
+    plan: free
+    rootDir: frontend
+    dockerfilePath: frontend/Dockerfile
+    autoDeploy: true
+
+
