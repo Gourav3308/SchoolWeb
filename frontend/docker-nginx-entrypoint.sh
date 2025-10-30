@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-:
-"${PORT:=8080}"
+:# Ensure defaults without executing their values as commands
+: "${PORT:=8080}"
 
 # Default BACKEND_URL if not provided (keeps current working value)
 : "${BACKEND_URL:=https://schoolweb-r87b.onrender.com}"
