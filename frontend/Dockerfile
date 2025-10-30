@@ -10,8 +10,8 @@ RUN npm run build
 FROM nginx:1.25-alpine
 WORKDIR /usr/share/nginx/html
 
-# Copy build output
-COPY --from=build /app/dist/frontend/ /usr/share/nginx/html/
+# Copy built Angular app (v17+ emits to 'browser') directly into Nginx root
+COPY --from=build /app/dist/frontend/browser/ /usr/share/nginx/html/
 
 # Template and entrypoint to support dynamic PORT on Render
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
