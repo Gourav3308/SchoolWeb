@@ -11,7 +11,7 @@ FROM nginx:1.25-alpine
 WORKDIR /usr/share/nginx/html
 
 # Copy build output
-COPY --from=build /app/dist/ /usr/share/nginx/html/
+COPY --from=build /app/dist/frontend/ /usr/share/nginx/html/
 
 # Template and entrypoint to support dynamic PORT on Render
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
