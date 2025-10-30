@@ -11,9 +11,9 @@ server {
         try_files $uri $uri/ /index.html;
     }
 
-    # Proxy API calls to Spring Boot backend on Render (single-origin, avoids CORS)
+    # Proxy API calls to Spring Boot backend (overridable via BACKEND_URL env)
     location /api/ {
-        proxy_pass https://schoolweb-r87b.onrender.com/; # backend base URL
+        proxy_pass ${BACKEND_URL}/;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
