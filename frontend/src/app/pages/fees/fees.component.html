@@ -1,0 +1,38 @@
+<section class="fees-page">
+  <div class="container">
+    <h1>Fee Structure</h1>
+    <p class="desc">Fee details for classes Nursery to 10.</p>
+    <div class="actions">
+      <button class="btn" (click)="downloadCsv()">Download CSV</button>
+    </div>
+
+    <div *ngIf="isLoading" class="loading">Loading...</div>
+
+    <div class="table-wrap" *ngIf="!isLoading">
+      <table class="fees-table">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Admission Fee/Year</th>
+            <th>Hostel Fee/Month</th>
+            <th>Transport Fee (Optional)</th>
+            <th>Tuition Fee</th>
+            <th>Exam Fee</th>
+            <th>Total Fee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let f of fees">
+            <td>{{ f.className }}</td>
+            <td>{{ f.admissionFeePerYear | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
+            <td>{{ f.hostelFeePerMonth | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
+            <td>{{ f.transportFee | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
+            <td>{{ f.tuitionFee | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
+            <td>{{ f.examFee | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
+            <td>{{ f.totalFee | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

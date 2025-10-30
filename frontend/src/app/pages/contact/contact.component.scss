@@ -1,0 +1,10 @@
+.page { padding: 2rem 1rem; max-width: 900px; margin: 0 auto; }
+.page h1 { margin: 0 0 0.25rem 0; font-size: clamp(1.5rem, 2.4vw + 0.6rem, 2.2rem); color: #0f172a; }
+.lead { color: #475569; margin-bottom: 1rem; }
+.cards { display: grid; gap: 0.6rem; }
+.card { background: #fff; border: 1px solid rgba(15,23,42,0.08); border-radius: 12px; padding: 0.9rem; }
+.map { color: #0284c7; text-decoration: none; font-weight: 600; }
+.map:hover { text-decoration: underline; }
+.map-embed { margin-top: 0.8rem; }
+.highlight { background: #fffbeb; border-color: #fde68a; }
+

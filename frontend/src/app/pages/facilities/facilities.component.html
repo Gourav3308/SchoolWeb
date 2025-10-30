@@ -1,0 +1,18 @@
+<section class="page">
+  <h1>Facilities</h1>
+  <p class="lead">World-class infrastructure to nurture every talent. Classes Nursery–10 available.</p>
+  <div class="prep-note">Also offering Bihar Board (Hindi Medium) preparation for Classes 9–10 by top-class teachers.</div>
+
+  <ng-container *ngFor="let it of images; let i = index">
+    <article class="facility">
+      <img [src]="it.src" [alt]="it.name" onerror="this.parentElement.style.display='none'"/>
+      <div class="desc">
+        <h3>{{ it.name }}</h3>
+        <p>
+          {{ it.name }} at our campus helps students grow through real experiences and modern resources.
+        </p>
+      </div>
+    </article>
+  </ng-container>
+
+</section>

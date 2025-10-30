@@ -1,0 +1,16 @@
+com\praswkrit\school\controller\AdminController.class
+com\praswkrit\school\controller\StudentController.class
+com\praswkrit\school\dto\StudentRegistrationDTO.class
+com\praswkrit\school\controller\HealthController.class
+com\praswkrit\school\service\EmailService.class
+com\praswkrit\school\controller\NoticeController$NoticeRequest.class
+com\praswkrit\school\model\Notice.class
+com\praswkrit\school\controller\NoticeController$NoticeUpdate.class
+com\praswkrit\school\controller\NoticeController.class
+com\praswkrit\school\repository\NoticeRepository.class
+com\praswkrit\school\model\Student.class
+com\praswkrit\school\config\SecurityConfig.class
+com\praswkrit\school\service\NoticeService.class
+com\praswkrit\school\service\StudentService.class
+com\praswkrit\school\SchoolwebBackendApplication.class
+com\praswkrit\school\repository\StudentRepository.class

@@ -1,0 +1,38 @@
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# Maven Wrapper Startup Script for Unix
+# ----------------------------------------------------------------------------
+
+set -e
+
+DIRNAME=$(cd "$(dirname "$0")" && pwd)
+APP_HOME="$DIRNAME"
+WRAPPER_JAR="$APP_HOME/.mvn/wrapper/maven-wrapper.jar"
+WRAPPER_PROPERTIES="$APP_HOME/.mvn/wrapper/maven-wrapper.properties"
+
+# Detect Java
+JAVA_EXE="${JAVA_HOME:+$JAVA_HOME/bin/}java"
+if ! command -v "$JAVA_EXE" >/dev/null 2>&1; then
+  JAVA_EXE=java
+fi
+
+if ! "$JAVA_EXE" -version >/dev/null 2>&1; then
+  echo "Error: JAVA_HOME is not set and no 'java' command could be found in your PATH." 1>&2
+  exit 1
+fi
+
+# Download wrapper jar if missing
+if [ ! -f "$WRAPPER_JAR" ]; then
+  mkdir -p "$APP_HOME/.mvn/wrapper"
+  WRAPPER_URL=$(awk -F= '/^wrapperUrl=/{print $2}' "$WRAPPER_PROPERTIES")
+  [ -z "$WRAPPER_URL" ] && WRAPPER_URL="https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.2.0/maven-wrapper-3.2.0.jar"
+  echo "Downloading Maven Wrapper JAR from $WRAPPER_URL"
+  curl -fsSL "$WRAPPER_URL" -o "$WRAPPER_JAR" || wget -q "$WRAPPER_URL" -O "$WRAPPER_JAR"
+fi
+
+exec "$JAVA_EXE" -classpath "$WRAPPER_JAR" -Dmaven.multiModuleProjectDirectory="$APP_HOME" org.apache.maven.wrapper.MavenWrapperMain "$@"
+
+
+
+
+

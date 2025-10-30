@@ -1,0 +1,7 @@
+.floating { position: fixed; right: 14px; bottom: 16px; display: grid; gap: 10px; z-index: 60; }
+.fab { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; text-decoration: none; font-size: 22px; box-shadow: 0 10px 22px rgba(0,0,0,0.2); border: 1px solid rgba(15,23,42,0.1); }
+.fab.call { background: #fff; color: #0f172a; }
+.fab.wa { background: #22c55e; color: #ffffff; }
+.fab.call { color: #0f172a; }
+.fab:hover { transform: translateY(-2px); }
+

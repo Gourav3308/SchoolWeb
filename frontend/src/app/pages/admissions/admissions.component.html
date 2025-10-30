@@ -1,0 +1,217 @@
+<section class="page booking-page">
+  <div class="container">
+    <h1>Reserve Seat - Admission Form</h1>
+    <p class="lead">Fill in all the details to reserve your seat. All fields marked with * are mandatory.</p>
+
+    <!-- Success Message -->
+    <div *ngIf="successMessage" class="alert alert-success">
+      <strong>✓ Success!</strong> {{ successMessage }}
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-error">
+      <strong>✗ Error:</strong> {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="booking-form">
+      
+      <!-- Personal Information -->
+      <div class="form-section">
+        <h2>Personal Information</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" formControlName="firstName" 
+                   [class.invalid]="submitted && f['firstName'].invalid">
+            <div *ngIf="submitted && f['firstName'].invalid" class="error-text">
+              First name is required (2-50 characters)
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" formControlName="lastName"
+                   [class.invalid]="submitted && f['lastName'].invalid">
+            <div *ngIf="submitted && f['lastName'].invalid" class="error-text">
+              Last name is required (2-50 characters)
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Date of Birth *</label>
+            <input type="date" formControlName="dateOfBirth"
+                   [class.invalid]="submitted && f['dateOfBirth'].invalid">
+            <div *ngIf="submitted && f['dateOfBirth'].invalid" class="error-text">
+              Date of birth is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Gender *</label>
+            <select formControlName="gender" 
+                    [class.invalid]="submitted && f['gender'].invalid">
+              <option value="">Select Gender</option>
+              <option *ngFor="let g of genders" [value]="g">{{ g }}</option>
+            </select>
+            <div *ngIf="submitted && f['gender'].invalid" class="error-text">
+              Gender is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Aadhar Number *</label>
+            <input type="text" formControlName="aadharNumber" maxlength="12"
+                   placeholder="12 digits"
+                   [class.invalid]="submitted && f['aadharNumber'].invalid">
+            <div *ngIf="submitted && f['aadharNumber'].invalid" class="error-text">
+              Valid 12-digit Aadhar number is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Profile Picture URL (Optional)</label>
+            <input type="url" formControlName="profilePictureUrl" 
+                   placeholder="https://example.com/image.jpg">
+          </div>
+        </div>
+      </div>
+
+      <!-- Admission Details -->
+      <div class="form-section">
+        <h2>Admission Details</h2>
+        <div class="form-group">
+          <label>Applying for Class *</label>
+          <select formControlName="applyingForClass"
+                  [class.invalid]="submitted && f['applyingForClass'].invalid">
+            <option value="">Select Class</option>
+            <option *ngFor="let cls of classes" [value]="cls">Class {{ cls }}</option>
+          </select>
+          <div *ngIf="submitted && f['applyingForClass'].invalid" class="error-text">
+            Please select a class
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Previous School Name *</label>
+          <input type="text" formControlName="previousSchoolName"
+                 [class.invalid]="submitted && f['previousSchoolName'].invalid">
+          <div *ngIf="submitted && f['previousSchoolName'].invalid" class="error-text">
+            Previous school name is required
+          </div>
+        </div>
+      </div>
+
+      <!-- Parent/Guardian Information -->
+      <div class="form-section">
+        <h2>Parent/Guardian Information</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Father's Name *</label>
+            <input type="text" formControlName="fatherName"
+                   [class.invalid]="submitted && f['fatherName'].invalid">
+            <div *ngIf="submitted && f['fatherName'].invalid" class="error-text">
+              Father's name is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Father's Occupation *</label>
+            <input type="text" formControlName="fatherOccupation"
+                   [class.invalid]="submitted && f['fatherOccupation'].invalid">
+            <div *ngIf="submitted && f['fatherOccupation'].invalid" class="error-text">
+              Father's occupation is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Mother's Name *</label>
+            <input type="text" formControlName="motherName"
+                   [class.invalid]="submitted && f['motherName'].invalid">
+            <div *ngIf="submitted && f['motherName'].invalid" class="error-text">
+              Mother's name is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mother's Occupation *</label>
+            <input type="text" formControlName="motherOccupation"
+                   [class.invalid]="submitted && f['motherOccupation'].invalid">
+            <div *ngIf="submitted && f['motherOccupation'].invalid" class="error-text">
+              Mother's occupation is required
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="form-section">
+        <h2>Contact Information</h2>
+        <div class="form-group">
+          <label>Address *</label>
+          <textarea formControlName="address" rows="3"
+                    [class.invalid]="submitted && f['address'].invalid"></textarea>
+          <div *ngIf="submitted && f['address'].invalid" class="error-text">
+            Address is required (minimum 10 characters)
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>City *</label>
+            <input type="text" formControlName="city"
+                   [class.invalid]="submitted && f['city'].invalid">
+            <div *ngIf="submitted && f['city'].invalid" class="error-text">
+              City is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label>State *</label>
+            <input type="text" formControlName="state"
+                   [class.invalid]="submitted && f['state'].invalid">
+            <div *ngIf="submitted && f['state'].invalid" class="error-text">
+              State is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Pin Code *</label>
+            <input type="text" formControlName="pinCode" maxlength="6"
+                   placeholder="6 digits"
+                   [class.invalid]="submitted && f['pinCode'].invalid">
+            <div *ngIf="submitted && f['pinCode'].invalid" class="error-text">
+              Valid 6-digit pin code is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" formControlName="phoneNumber" maxlength="10"
+                   placeholder="10 digits"
+                   [class.invalid]="submitted && f['phoneNumber'].invalid">
+            <div *ngIf="submitted && f['phoneNumber'].invalid" class="error-text">
+              Valid 10-digit phone number is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" formControlName="email"
+                   [class.invalid]="submitted && f['email'].invalid">
+            <div *ngIf="submitted && f['email'].invalid" class="error-text">
+              Valid email address is required
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-actions">
+        <button type="submit" class="btn-submit" [disabled]="isSubmitting">
+          <span *ngIf="!isSubmitting">Submit Application</span>
+          <span *ngIf="isSubmitting">Submitting...</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

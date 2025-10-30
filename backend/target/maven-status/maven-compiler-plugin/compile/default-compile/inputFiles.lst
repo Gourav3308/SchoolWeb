@@ -1,0 +1,17 @@
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\config\SecurityConfig.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\controller\AdminController.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\controller\FeeController.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\controller\HealthController.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\controller\NoticeController.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\controller\StudentController.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\dto\StudentRegistrationDTO.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\model\Fee.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\model\Notice.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\model\Student.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\repository\FeeRepository.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\repository\NoticeRepository.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\repository\StudentRepository.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\SchoolwebBackendApplication.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\service\EmailService.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\service\NoticeService.java
+C:\Users\goura\OneDrive\Desktop\schoolweb\backend\src\main\java\com\praswkrit\school\service\StudentService.java

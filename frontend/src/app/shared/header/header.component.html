@@ -1,0 +1,91 @@
+<header class="site-header" *ngIf="!isAdmin">
+  <div class="container">
+    <div class="brand">
+      <div class="logo" aria-label="School logo: Ashoka Chakra with JAI GURU">
+        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true">
+          <!-- single saffron disc -->
+          <circle cx="24" cy="24" r="22" fill="#ff8c00" stroke="#ff8c00" stroke-width="3"/>
+          <!-- 24 spokes in semi-transparent white for contrast -->
+          <g stroke="#ffffff" stroke-opacity="0.5" stroke-width="1.5">
+            <line x1="24" y1="8.5" x2="24" y2="39.5"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(15 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(30 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(45 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(60 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(75 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(90 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(105 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(120 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(135 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(150 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(165 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(180 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(195 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(210 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(225 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(240 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(255 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(270 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(285 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(300 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(315 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(330 24 24)"/>
+            <line x1="24" y1="8.5" x2="24" y2="39.5" transform="rotate(345 24 24)"/>
+          </g>
+          <!-- High-contrast label: white fill with dark stroke to ensure readability -->
+          <text x="24" y="29" text-anchor="middle" font-size="9.5" font-weight="900"
+                fill="#ffffff" stroke="#7a2e00" stroke-width="0.6"
+                style="paint-order: stroke" font-family="Segoe UI, Arial, sans-serif">JAI GURU</text>
+        </svg>
+      </div>
+      <div class="meta">
+        <div class="title">PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR</div>
+        <div class="subtitle">Learning • Confidence • Leadership</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a routerLink="/" routerLinkActive="active" class="nav-link" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a routerLink="/facilities" routerLinkActive="active" class="nav-link">Facilities</a>
+      <a routerLink="/fees" routerLinkActive="active" class="nav-link">Fees</a>
+      <a routerLink="/admissions" routerLinkActive="active" class="nav-link">Admissions</a>
+      <a routerLink="/teachers" routerLinkActive="active" class="nav-link">Teachers</a>
+      <a routerLink="/about" routerLinkActive="active" class="nav-link">About</a>
+      <a routerLink="/gallery" routerLinkActive="active" class="nav-link">Gallery</a>
+      <a routerLink="/notice" routerLinkActive="active" class="nav-link">Notice</a>
+      <a routerLink="/contact" routerLinkActive="active" class="nav-link">Contact</a>
+      <a routerLink="/admin/login" class="nav-link login-btn">Login</a>
+    </nav>
+  </div>
+  <div class="notice-ticker within-header" *ngIf="isHome && notices.length">
+    <div class="ticker-inner">
+      <div class="marquee">
+        <div class="ticker-track">
+          <div class="ticker-item" *ngFor="let n of notices">{{ n.message }}</div>
+          <div class="ticker-item" *ngFor="let n of notices">{{ n.message }}</div>
+        </div>
+      </div>
+      <div class="ticker-gradient left"></div>
+      <div class="ticker-gradient right"></div>
+    </div>
+  </div>
+</header>
+
+<header class="site-header admin-header" *ngIf="isAdmin">
+  <div class="container">
+    <div class="brand">
+      <div class="logo" aria-label="School logo: Ashoka Chakra with JAI GURU">
+        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true">
+          <circle cx="24" cy="24" r="22" fill="#ff8c00" stroke="#ff8c00" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="meta">
+        <div class="title">Admin Panel</div>
+        <div class="subtitle">Manage applications</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn danger" (click)="logout()">Logout</button>
+    </nav>
+  </div>
+  
+</header>

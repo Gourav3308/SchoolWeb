@@ -1,0 +1,45 @@
+<section class="teachers-page">
+  <div class="container">
+    <h1>Our Teaching Staff</h1>
+
+    <div *ngIf="principal" class="principal-card">
+      <img [src]="principal.photoUrl" (error)="onImgError($event)" alt="Principal photo" />
+      <div class="meta">
+        <div class="title">Principal</div>
+        <h2>{{ principal.name }}</h2>
+        <div class="rows">
+          <div><strong>Main Subject:</strong> {{ principal.mainSubject }}</div>
+          <div><strong>Qualification:</strong> {{ principal.qualification }}</div>
+          <div><strong>Academic:</strong> {{ principal.academicQualification }}</div>
+          <div><strong>Class Taught:</strong> {{ principal.classTaught }}</div>
+          <div class="muted">DoJ School: {{ principal.dateOfJoiningSchool }} · Mobile: {{ principal.mobile }}</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Teachers</h3>
+    <div class="grid">
+      <div class="card" *ngFor="let t of others">
+        <div class="top">
+          <img *ngIf="t.photoUrl" [src]="t.photoUrl" (error)="onImgError($event)" alt="{{t.name}} photo" />
+          <div class="name-wrap">
+            <h4>{{ t.name }}</h4>
+            <div class="sub">{{ t.typeOfTeacher }} · {{ t.appointmentNature }}</div>
+          </div>
+        </div>
+        <div class="rows">
+          <div><span>Main Subject</span><span>{{ t.mainSubject }}</span></div>
+          <div><span>Qualification</span><span>{{ t.qualification }}</span></div>
+          <div><span>Academic</span><span>{{ t.academicQualification }}</span></div>
+          <div><span>Class Taught</span><span>{{ t.classTaught }}</span></div>
+          <div><span>DOB</span><span>{{ t.dateOfBirth }}</span></div>
+          <div><span>Joined Service</span><span>{{ t.dateOfJoiningService }}</span></div>
+          <div><span>Joined School</span><span>{{ t.dateOfJoiningSchool }}</span></div>
+          <div><span>Mobile</span><span>{{ t.mobile }}</span></div>
+          <div><span>Aadhaar</span><span>{{ t.aadhaarMasked }}</span></div>
+        </div>
+        <div class="verification" *ngIf="t.verification">{{ t.verification }}</div>
+      </div>
+    </div>
+  </div>
+</section>

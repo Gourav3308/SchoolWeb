@@ -1,0 +1,14 @@
+<section class="page">
+  <h1>Notice Board</h1>
+  <p class="lead">Latest announcements and updates.</p>
+  <div class="notices" *ngIf="!isLoading; else loadingTpl">
+    <article class="notice" *ngFor="let n of notices">
+      <div class="meta">{{ n.createdAt | date:'mediumDate' }}</div>
+      <h3>{{ n.message }}</h3>
+    </article>
+    <div *ngIf="notices.length === 0" class="empty">No notices yet.</div>
+  </div>
+  <ng-template #loadingTpl>
+    <div class="empty">Loading notices...</div>
+  </ng-template>
+</section>

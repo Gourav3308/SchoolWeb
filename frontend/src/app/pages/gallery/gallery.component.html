@@ -1,0 +1,11 @@
+<section class="page">
+  <h1>Gallery</h1>
+  <p class="lead">Glimpses of campus life, events, and achievements.</p>
+  <div *ngIf="isLoading" class="empty">Loading images...</div>
+  <div class="masonry" *ngIf="!isLoading && images.length; else emptyTpl">
+    <img *ngFor="let src of images" [src]="src" alt="School image" />
+  </div>
+  <ng-template #emptyTpl>
+    <div class="empty">Add images to <code>src/assets/school/gallery</code> and update <code>manifest.json</code>.</div>
+  </ng-template>
+</section>
