@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-:# Ensure defaults without executing their values as commands
+# Ensure defaults without executing their values as commands
 : "${PORT:=8080}"
 
 # Default BACKEND_URL if not provided (keeps current working value)
