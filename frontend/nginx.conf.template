@@ -23,6 +23,11 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_ssl_server_name on;
         proxy_ssl_name $proxy_host;
+        # Increase timeouts to accommodate Render free-tier cold starts
+        proxy_connect_timeout 60s;
+        proxy_read_timeout 180s;
+        proxy_send_timeout 180s;
+        send_timeout 180s;
     }
 }
 
