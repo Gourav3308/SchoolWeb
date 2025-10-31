@@ -23,9 +23,12 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .cors(cors -> {})
+            .httpBasic(basic -> basic.disable())
+            .formLogin(form -> form.disable())
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/api/students/register", "/api/admin/login").permitAll()
-                .anyRequest().permitAll() // For now, allow all - can be secured later
+                .anyRequest().permitAll()
             );
         
         return http.build();
