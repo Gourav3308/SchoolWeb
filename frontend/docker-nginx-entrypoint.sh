@@ -5,7 +5,8 @@ set -e
 : "${PORT:=8080}"
 
 # Default BACKEND_URL if not provided (keeps current working value)
-: "${BACKEND_URL:=https://schoolweb-r87b.onrender.com}"
+# Updated to the currently active backend service URL
+: "${BACKEND_URL:=https://schoolweb-1-homv.onrender.com}"
 
 if [ -f /etc/nginx/templates/default.conf.template ]; then
   envsubst '\$PORT\$BACKEND_URL' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf

@@ -61,9 +61,9 @@
       <a routerLink="/admin/login" class="nav-link login-btn" (click)="mobileMenuOpen = false">Login</a>
     </nav>
   </div>
-  <div class="notice-ticker within-header" *ngIf="isHome && notices.length">
+  <div class="notice-ticker within-header" *ngIf="isHome">
     <div class="ticker-inner">
-      <div class="marquee">
+      <div class="marquee" *ngIf="!isLoading && notices.length; else tickerLoadingTpl">
         <div class="ticker-track">
           <div class="ticker-item" *ngFor="let n of notices">{{ n.message }}</div>
           <div class="ticker-item" *ngFor="let n of notices">{{ n.message }}</div>
@@ -73,6 +73,12 @@
       <div class="ticker-gradient right"></div>
     </div>
   </div>
+
+  <ng-template #tickerLoadingTpl>
+    <div class="ticker-loading">
+      <span class="rounded-spinner" aria-label="Loading notices"></span>
+    </div>
+  </ng-template>
 </header>
 
 <header class="site-header admin-header" *ngIf="isAdmin">

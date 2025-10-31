@@ -6,7 +6,7 @@
       <button class="btn" (click)="downloadCsv()">Download CSV</button>
     </div>
 
-    <div *ngIf="isLoading" class="loading">Loading...</div>
+    <div *ngIf="isLoading" class="loading"><span class="rounded-spinner" aria-label="Loading"></span></div>
 
     <div class="table-wrap" *ngIf="!isLoading">
       <table class="fees-table">

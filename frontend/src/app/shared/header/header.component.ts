@@ -15,6 +15,7 @@ export class HeaderComponent {
   isHome = false;
   notices: { message: string }[] = [];
   mobileMenuOpen = false;
+  isLoading = true;
 
   constructor(private router: Router, private http: HttpClient) {
     this.updateAdminFlag(router.url);
@@ -50,10 +51,12 @@ export class HeaderComponent {
   }
 
   private loadActiveNotices() {
+    this.isLoading = true;
     this.http.get<any[]>('/api/notices/active')
       .subscribe({ next: (data) => {
         // Show all active notices in the ticker
         this.notices = Array.isArray(data) ? data : [];
-      }, error: () => {} });
+        this.isLoading = false;
+      }, error: () => { this.isLoading = false; } });
   }
 }

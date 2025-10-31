@@ -9,6 +9,6 @@
     <div *ngIf="notices.length === 0" class="empty">No notices yet.</div>
   </div>
   <ng-template #loadingTpl>
-    <div class="empty">Loading notices...</div>
+    <div class="loading-wrap"><span class="rounded-spinner" aria-label="Loading"></span></div>
   </ng-template>
 </section>
