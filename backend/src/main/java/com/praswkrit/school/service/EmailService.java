@@ -11,11 +11,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 
-    @Value("${email.from:noreply@schoolweb.app}")
+    @Value("${email.from:${SENDGRID_FROM_EMAIL:${EMAIL_FROM:noreply@schoolweb.app}}}")
     private String fromEmail;
 
-    @Value("${sendgrid.api.key:}")
+    @Value("${sendgrid.api.key:${SENDGRID_API_KEY:}}")
     private String sendgridApiKey;
+
+    @Value("${resend.api.key:${RESEND_API_KEY:}}")
+    private String resendApiKey;
 
     private static final String SENDGRID_ENDPOINT = "https://api.sendgrid.com/v3/mail/send";
 
@@ -60,7 +63,8 @@ public class EmailService {
     private void sendViaSendGrid(String toEmail, String subject, String textBody) {
         try {
             if (sendgridApiKey == null || sendgridApiKey.isBlank()) {
-                System.err.println("Error sending email: SENDGRID_API_KEY not configured");
+                // Try Resend directly if SendGrid not configured
+                sendViaResend(toEmail, subject, textBody);
                 return;
             }
 
@@ -86,8 +90,47 @@ public class EmailService {
                 return; // success
             }
             System.err.println("Error sending email via SendGrid: status=" + response.statusCode() + ", body=" + response.body());
+            // Fallback to Resend if configured
+            if (resendApiKey != null && !resendApiKey.isBlank()) {
+                sendViaResend(toEmail, subject, textBody);
+            }
         } catch (Exception e) {
             System.err.println("Error sending email via SendGrid: " + e.getMessage());
+            if (resendApiKey != null && !resendApiKey.isBlank()) {
+                sendViaResend(toEmail, subject, textBody);
+            }
+        }
+    }
+
+    private void sendViaResend(String toEmail, String subject, String textBody) {
+        try {
+            if (resendApiKey == null || resendApiKey.isBlank()) {
+                System.err.println("Error sending email: RESEND_API_KEY not configured");
+                return;
+            }
+
+            String json = "{" +
+                "\"from\":\"" + escape(fromEmail) + "\"," +
+                "\"to\":[\"" + escape(toEmail) + "\"]," +
+                "\"subject\":\"" + escape(subject) + "\"," +
+                "\"text\":\"" + escape(textBody) + "\"" +
+            "}";
+
+            HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://api.resend.com/emails"))
+                .header("Authorization", "Bearer " + resendApiKey)
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build();
+
+            HttpClient client = HttpClient.newHttpClient();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() >= 200 && response.statusCode() < 300) {
+                return; // success
+            }
+            System.err.println("Error sending email via Resend: status=" + response.statusCode() + ", body=" + response.body());
+        } catch (Exception e) {
+            System.err.println("Error sending email via Resend: " + e.getMessage());
         }
     }
 
