@@ -1,73 +1,99 @@
 package com.praswkrit.school.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
-    
-    @Autowired
-    private JavaMailSender mailSender;
-    
+
+    @Value("${email.from:noreply@schoolweb.app}")
+    private String fromEmail;
+
+    @Value("${sendgrid.api.key:}")
+    private String sendgridApiKey;
+
+    private static final String SENDGRID_ENDPOINT = "https://api.sendgrid.com/v3/mail/send";
+
     public void sendApprovalEmail(String studentEmail, String studentName, String className) {
-        try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("pkm85973@gmail.com");
-            message.setTo(studentEmail);
-            message.setSubject("🎉 Seat Confirmed - PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR");
-            
-            String emailBody = String.format(
-                "Dear %s,\n\n" +
-                "Congratulations! Your seat reservation has been approved.\n\n" +
-                "Your seat is confirmed for Class: %s\n\n" +
-                "School Details:\n" +
-                "PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR\n" +
-                "Bhathiya FORBESGANJ ARARIA, Bihar, 854316\n" +
-                "Phone: 7903354776, 9771744779\n\n" +
-                "Please visit the school office to complete the admission process.\n\n" +
-                "Best regards,\n" +
-                "Admission Office\n" +
-                "PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR",
-                studentName, className
-            );
-            
-            message.setText(emailBody);
-            mailSender.send(message);
-        } catch (Exception e) {
-            System.err.println("Error sending email: " + e.getMessage());
-            // Don't throw - allow registration to continue even if email fails
-        }
+        String subject = "\uD83C\uDF89 Seat Confirmed - PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR";
+        String body = String.format(
+            "Dear %s,\n\n" +
+            "Congratulations! Your seat reservation has been approved.\n\n" +
+            "Your seat is confirmed for Class: %s\n\n" +
+            "School Details:\n" +
+            "PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR\n" +
+            "Bhathiya FORBESGANJ ARARIA, Bihar, 854316\n" +
+            "Phone: 7903354776, 9771744779\n\n" +
+            "Please visit the school office to complete the admission process.\n\n" +
+            "Best regards,\n" +
+            "Admission Office\n" +
+            "PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR",
+            studentName, className
+        );
+        sendViaSendGrid(studentEmail, subject, body);
     }
 
     public void sendRejectionEmail(String studentEmail, String studentName, String className) {
+        String subject = "Application Update - PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR";
+        String body = String.format(
+            "Dear %s,\n\n" +
+            "Thank you for applying to PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR.\n\n" +
+            "We regret to inform you that your application for Class: %s could not be approved at this time.\n\n" +
+            "You are welcome to reapply in the future. For any queries, please contact the school office.\n\n" +
+            "School Details:\n" +
+            "PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR\n" +
+            "Bhathiya FORBESGANJ ARARIA, Bihar, 854316\n" +
+            "Phone: 7903354776, 9771744779\n\n" +
+            "Best regards,\n" +
+            "Admission Office\n" +
+            "PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR",
+            studentName, className
+        );
+        sendViaSendGrid(studentEmail, subject, body);
+    }
+
+    private void sendViaSendGrid(String toEmail, String subject, String textBody) {
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("pkm85973@gmail.com");
-            message.setTo(studentEmail);
-            message.setSubject("Application Update - PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR");
+            if (sendgridApiKey == null || sendgridApiKey.isBlank()) {
+                System.err.println("Error sending email: SENDGRID_API_KEY not configured");
+                return;
+            }
 
-            String emailBody = String.format(
-                "Dear %s,\n\n" +
-                "Thank you for applying to PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR.\n\n" +
-                "We regret to inform you that your application for Class: %s could not be approved at this time.\n\n" +
-                "You are welcome to reapply in the future. For any queries, please contact the school office.\n\n" +
-                "School Details:\n" +
-                "PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR\n" +
-                "Bhathiya FORBESGANJ ARARIA, Bihar, 854316\n" +
-                "Phone: 7903354776, 9771744779\n\n" +
-                "Best regards,\n" +
-                "Admission Office\n" +
-                "PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR",
-                studentName, className
-            );
+            // Minimal JSON payload for SendGrid API
+            String json = "{" +
+                "\"personalizations\":[{\"to\":[{\"email\":\"" + escape(toEmail) + "\"}]}]," +
+                "\"from\":{\"email\":\"" + escape(fromEmail) + "\"}," +
+                "\"subject\":\"" + escape(subject) + "\"," +
+                "\"content\":[{\"type\":\"text/plain\",\"value\":\"" + escape(textBody) + "\"}]" +
+            "}";
 
-            message.setText(emailBody);
-            mailSender.send(message);
+            HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(SENDGRID_ENDPOINT))
+                .header("Authorization", "Bearer " + sendgridApiKey)
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build();
+
+            HttpClient client = HttpClient.newHttpClient();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() >= 200 && response.statusCode() < 300) {
+                return; // success
+            }
+            System.err.println("Error sending email via SendGrid: status=" + response.statusCode() + ", body=" + response.body());
         } catch (Exception e) {
-            System.err.println("Error sending rejection email: " + e.getMessage());
+            System.err.println("Error sending email via SendGrid: " + e.getMessage());
         }
+    }
+
+    private static String escape(String s) {
+        if (s == null) return "";
+        return s.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n");
     }
 }
 
