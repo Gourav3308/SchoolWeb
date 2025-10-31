@@ -6,7 +6,65 @@
 .actions { margin-bottom: 0.75rem; }
 .btn { background: #0ea5e9; color: #fff; border: 0; padding: 0.5rem 0.85rem; border-radius: 8px; font-weight: 700; cursor: pointer; }
 .loading { text-align: center; color: #64748b; padding: 2rem; }
-.table-wrap { overflow-x: auto; }
-.fees-table { width: 100%; border-collapse: collapse; background: #fff; }
-.fees-table th, .fees-table td { padding: 0.6rem 0.75rem; border: 1px solid #e2e8f0; text-align: left; }
-.fees-table th { background: #f8fafc; color: #0f172a; }
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+.fees-table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.fees-table th, .fees-table td {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #e2e8f0;
+  text-align: left;
+}
+.fees-table th {
+  background: #f8fafc;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.9rem;
+  position: sticky;
+  left: 0;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .fees-page {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .table-wrap {
+    margin: 0 -0.75rem;
+    padding: 0 0.75rem;
+  }
+  
+  .fees-table {
+    font-size: 0.85rem;
+  }
+  
+  .fees-table th, .fees-table td {
+    padding: 0.5rem 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .fees-page {
+    padding: 1rem 0.5rem;
+  }
+  
+  .fees-table {
+    font-size: 0.8rem;
+  }
+  
+  .fees-table th, .fees-table td {
+    padding: 0.45rem 0.5rem;
+  }
+}

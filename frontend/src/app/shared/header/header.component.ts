@@ -14,18 +14,24 @@ export class HeaderComponent {
   isAdmin = false;
   isHome = false;
   notices: { message: string }[] = [];
+  mobileMenuOpen = false;
 
   constructor(private router: Router, private http: HttpClient) {
     this.updateAdminFlag(router.url);
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         this.updateAdminFlag(e.urlAfterRedirects);
+        this.mobileMenuOpen = false; // Close mobile menu on navigation
         if (this.isHome) {
           this.loadActiveNotices();
         }
       }
     });
     this.loadActiveNotices();
+  }
+
+  toggleMobileMenu() {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 
   private updateAdminFlag(url: string) {

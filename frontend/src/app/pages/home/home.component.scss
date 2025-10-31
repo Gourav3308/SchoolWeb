@@ -31,6 +31,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  margin: 0 1rem;
 }
 
 .hero-image {
@@ -41,6 +42,28 @@
   object-fit: cover;
   transform: scale(1.05);
   filter: saturate(1.1) contrast(1.05);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 60vh;
+    min-height: 350px;
+    border-radius: 12px;
+    margin: 0 0.75rem;
+  }
+  
+  .hero-image {
+    object-position: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 50vh;
+    min-height: 280px;
+    border-radius: 8px;
+    margin: 0 0.5rem;
+  }
 }
 
 .overlay {
@@ -198,19 +221,61 @@
   box-shadow: 0 6px 25px rgba(255, 140, 0, 0.5);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .title-strip {
+    padding: 1rem 0.75rem 0.5rem;
+  }
+  
   .cta-group {
     flex-direction: column;
     width: 100%;
+    gap: 0.75rem;
   }
   
   .cta {
     width: 100%;
-    max-width: 280px;
+    max-width: 100%;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.95rem;
   }
 
-  /* On small screens keep tagline centered and allow wrap; reset offset */
-  .tagline { align-self: center; margin: 0; max-width: 92%; white-space: normal; top: 0; }
+  .tagline {
+    align-self: center;
+    margin: 0;
+    max-width: 95%;
+    white-space: normal;
+    top: 0;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .hero-content {
+    padding: 0 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-name {
+    font-size: 1.5rem;
+  }
+  
+  .title-sub {
+    font-size: 0.85rem;
+  }
+  
+  .school-name {
+    font-size: 1.8rem;
+  }
+  
+  .tagline {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+  }
+  
+  .cta {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+  }
 }
 
 .stats { padding: 1rem 0; }

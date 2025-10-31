@@ -13,7 +13,47 @@
 .facility:nth-child(even) .desc { order: 1; }
 
 @media (max-width: 820px) {
-  .facility { grid-template-columns: 1fr; }
-  .facility:nth-child(even) img, .facility:nth-child(even) .desc { order: unset; }
+  .page {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .facility {
+    grid-template-columns: 1fr;
+    padding: 0.875rem 0;
+  }
+  
+  .facility:nth-child(even) img,
+  .facility:nth-child(even) .desc {
+    order: unset;
+  }
+  
+  .facility img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 1rem 0.5rem;
+  }
+  
+  .facility {
+    padding: 0.75rem 0;
+  }
+  
+  .facility img {
+    border-radius: 8px;
+  }
+  
+  .facility .desc h3 {
+    font-size: 1.1rem;
+  }
+  
+  .facility .desc p {
+    font-size: 0.9rem;
+  }
 }
 

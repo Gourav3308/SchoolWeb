@@ -408,14 +408,81 @@ interface Student {
     }
 
     @media (max-width: 768px) {
+      .admin-panel {
+        padding: 1.5rem 0.75rem;
+      }
+      
       .students-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
       }
 
       .admin-nav {
         flex-direction: column;
         gap: 1rem;
         align-items: flex-start;
+        
+        .right {
+          width: 100%;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        
+        .pill {
+          font-size: 0.85rem;
+          padding: 0.45rem 0.75rem;
+          flex: 1;
+          min-width: calc(50% - 0.25rem);
+        }
+      }
+      
+      .notice-form, .notice-manage {
+        padding: 0.875rem;
+      }
+      
+      .notice-manage .item {
+        padding: 0.625rem;
+      }
+      
+      .notice-manage .item > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+      }
+      
+      .student-card {
+        padding: 1.25rem;
+      }
+      
+      .info-row {
+        flex-direction: column;
+        gap: 0.25rem;
+        
+        .label {
+          min-width: auto;
+          font-size: 0.85rem;
+        }
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .admin-panel {
+        padding: 1rem 0.5rem;
+      }
+      
+      .admin-nav h1 {
+        font-size: 1.1rem;
+      }
+      
+      .notice-form h3, .notice-manage h3 {
+        font-size: 1rem;
+      }
+      
+      .student-card {
+        padding: 1rem;
+      }
+      
+      .card-header h3 {
+        font-size: 1rem;
       }
     }
   `]

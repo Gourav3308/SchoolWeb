@@ -119,6 +119,43 @@ import { Router } from '@angular/router';
       border-radius: 6px;
       font-size: 0.9rem;
     }
+    
+    @media (max-width: 768px) {
+      .admin-login-page {
+        padding: 1.5rem 1rem;
+        min-height: 60vh;
+      }
+      
+      .login-container {
+        padding: 2rem 1.5rem;
+        border-radius: 10px;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .admin-login-page {
+        padding: 1rem 0.75rem;
+      }
+      
+      .login-container {
+        padding: 1.5rem 1.25rem;
+      }
+      
+      h1 {
+        font-size: 1.35rem;
+        margin-bottom: 1.25rem;
+      }
+      
+      .btn-login {
+        font-size: 1rem;
+        padding: 0.875rem;
+      }
+    }
   `]
 })
 export class AdminLoginComponent {

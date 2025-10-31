@@ -43,17 +43,22 @@
         <div class="subtitle">Learning • Confidence • Leadership</div>
       </div>
     </div>
-    <nav class="nav">
-      <a routerLink="/" routerLinkActive="active" class="nav-link" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-      <a routerLink="/facilities" routerLinkActive="active" class="nav-link">Facilities</a>
-      <a routerLink="/fees" routerLinkActive="active" class="nav-link">Fees</a>
-      <a routerLink="/admissions" routerLinkActive="active" class="nav-link">Admissions</a>
-      <a routerLink="/teachers" routerLinkActive="active" class="nav-link">Teachers</a>
-      <a routerLink="/about" routerLinkActive="active" class="nav-link">About</a>
-      <a routerLink="/gallery" routerLinkActive="active" class="nav-link">Gallery</a>
-      <a routerLink="/notice" routerLinkActive="active" class="nav-link">Notice</a>
-      <a routerLink="/contact" routerLinkActive="active" class="nav-link">Contact</a>
-      <a routerLink="/admin/login" class="nav-link login-btn">Login</a>
+    <button class="mobile-menu-toggle" (click)="toggleMobileMenu()" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="nav" [class.mobile-open]="mobileMenuOpen">
+      <a routerLink="/" routerLinkActive="active" class="nav-link" [routerLinkActiveOptions]="{ exact: true }" (click)="mobileMenuOpen = false">Home</a>
+      <a routerLink="/facilities" routerLinkActive="active" class="nav-link" (click)="mobileMenuOpen = false">Facilities</a>
+      <a routerLink="/fees" routerLinkActive="active" class="nav-link" (click)="mobileMenuOpen = false">Fees</a>
+      <a routerLink="/admissions" routerLinkActive="active" class="nav-link" (click)="mobileMenuOpen = false">Admissions</a>
+      <a routerLink="/teachers" routerLinkActive="active" class="nav-link" (click)="mobileMenuOpen = false">Teachers</a>
+      <a routerLink="/about" routerLinkActive="active" class="nav-link" (click)="mobileMenuOpen = false">About</a>
+      <a routerLink="/gallery" routerLinkActive="active" class="nav-link" (click)="mobileMenuOpen = false">Gallery</a>
+      <a routerLink="/notice" routerLinkActive="active" class="nav-link" (click)="mobileMenuOpen = false">Notice</a>
+      <a routerLink="/contact" routerLinkActive="active" class="nav-link" (click)="mobileMenuOpen = false">Contact</a>
+      <a routerLink="/admin/login" class="nav-link login-btn" (click)="mobileMenuOpen = false">Login</a>
     </nav>
   </div>
   <div class="notice-ticker within-header" *ngIf="isHome && notices.length">
