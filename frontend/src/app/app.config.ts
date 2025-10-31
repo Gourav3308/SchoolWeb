@@ -1,4 +1,4 @@
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, Routes, withInMemoryScrolling } from '@angular/router';
 import { AboutComponent } from './pages/about/about.component';
@@ -12,6 +12,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NoticeComponent } from './pages/notice/notice.component';
 import { TeachersComponent } from './pages/teachers/teachers.component';
 import { FeesComponent } from './pages/fees/fees.component';
+import { apiInterceptor } from './core/api.interceptor';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -32,6 +33,9 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })),
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(
+      withInterceptors([apiInterceptor]),
+      withInterceptorsFromDi()
+    )
   ]
 };
