@@ -133,7 +133,7 @@ export class AdminLoginComponent {
     this.errorMessage = '';
     this.isLoading = true;
 
-    this.http.post<any>('http://localhost:8082/api/admin/login', {
+    this.http.post<any>('/api/admin/login', {
       username: this.username,
       password: this.password
     }).subscribe({

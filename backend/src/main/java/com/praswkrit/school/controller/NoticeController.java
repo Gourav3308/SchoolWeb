@@ -22,7 +22,6 @@ import com.praswkrit.school.service.NoticeService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:4200", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS }, allowedHeaders = {"*"})
 public class NoticeController {
 
     @Autowired

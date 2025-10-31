@@ -25,7 +25,7 @@ export class FeesComponent {
   isLoading = true;
 
   constructor(private http: HttpClient) {
-    this.http.get<Fee[]>('http://localhost:8082/api/fees').subscribe({
+    this.http.get<Fee[]>('/api/fees').subscribe({
       next: (data) => { this.fees = data || []; this.isLoading = false; },
       error: () => { this.isLoading = false; }
     });

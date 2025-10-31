@@ -447,7 +447,7 @@ export class AdminPanelComponent implements OnInit {
 
   loadStudents() {
     this.isLoading = true;
-    this.http.get<Student[]>('http://localhost:8082/api/students')
+    this.http.get<Student[]>('/api/students')
       .subscribe({
         next: (data) => {
           this.students = data;
@@ -461,7 +461,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   loadNotices() {
-    this.http.get<any[]>('http://localhost:8082/api/notices')
+    this.http.get<any[]>('/api/notices')
       .subscribe({
         next: (data) => {
           this.notices = (data || []).map(n => ({ ...n, editMessage: n.message }));
@@ -471,25 +471,25 @@ export class AdminPanelComponent implements OnInit {
   }
 
   loadFees() {
-    this.http.get<any[]>('http://localhost:8082/api/fees')
+    this.http.get<any[]>('/api/fees')
       .subscribe({ next: (data) => { this.fees = data || []; }, error: () => {} });
   }
 
   addFee() {
     const body = { ...this.newFee };
-    this.http.post<any>('http://localhost:8082/api/fees', body, { headers: { 'Content-Type': 'application/json' } })
+    this.http.post<any>('/api/fees', body, { headers: { 'Content-Type': 'application/json' } })
       .subscribe({ next: () => { this.newFee = { className: 'Nursery', admissionFeePerYear: 0, hostelFeePerMonth: 0, transportFee: 0, tuitionFee: 0, examFee: 0, totalFee: 0 }; this.loadFees(); }, error: () => { alert('Error adding fee'); } });
   }
 
   saveFee(f: any) {
     const body = { ...f };
-    this.http.put<any>(`http://localhost:8082/api/fees/${f.id}`, body, { headers: { 'Content-Type': 'application/json' } })
+    this.http.put<any>(`/api/fees/${f.id}`, body, { headers: { 'Content-Type': 'application/json' } })
       .subscribe({ next: () => { alert('Fee updated'); this.loadFees(); }, error: () => { alert('Error updating fee'); } });
   }
 
   deleteFee(f: any) {
     if (!confirm('Delete this fee row?')) return;
-    this.http.delete<any>(`http://localhost:8082/api/fees/${f.id}`)
+    this.http.delete<any>(`/api/fees/${f.id}`)
       .subscribe({ next: () => { this.loadFees(); }, error: () => { alert('Error deleting fee'); } });
   }
 
@@ -497,7 +497,7 @@ export class AdminPanelComponent implements OnInit {
     const msg = this.newNotice?.trim();
     if (!msg) return;
     this.isPublishing = true;
-    this.http.post<any>('http://localhost:8082/api/notices', { message: msg }, {
+    this.http.post<any>('/api/notices', { message: msg }, {
         headers: { 'Content-Type': 'application/json' }
       })
       .subscribe({
@@ -517,7 +517,7 @@ export class AdminPanelComponent implements OnInit {
 
   saveNotice(n: any) {
     n._saving = true;
-    this.http.put<any>(`http://localhost:8082/api/notices/${n.id}`, { message: n.editMessage, active: n.active }, {
+    this.http.put<any>(`/api/notices/${n.id}`, { message: n.editMessage, active: n.active }, {
       headers: { 'Content-Type': 'application/json' }
     }).subscribe({
       next: () => { n._saving = false; n.message = n.editMessage; alert('Updated'); },
@@ -528,7 +528,7 @@ export class AdminPanelComponent implements OnInit {
   deleteNotice(n: any) {
     if (!confirm('Delete this notice?')) return;
     n._deleting = true;
-    this.http.delete<any>(`http://localhost:8082/api/notices/${n.id}`)
+    this.http.delete<any>(`/api/notices/${n.id}`)
       .subscribe({
         next: () => { n._deleting = false; this.loadNotices(); },
         error: (err) => { n._deleting = false; console.error('Delete error', err); alert('Error deleting'); }
@@ -550,7 +550,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   approveStudent(id: string) {
-    this.http.post<any>(`http://localhost:8082/api/students/${id}/approve`, {})
+    this.http.post<any>(`/api/students/${id}/approve`, {})
       .subscribe({
         next: () => {
           this.loadStudents();
@@ -565,7 +565,7 @@ export class AdminPanelComponent implements OnInit {
     if (!confirm('Are you sure you want to reject this application?')) {
       return;
     }
-    this.http.post<any>(`http://localhost:8082/api/students/${id}/reject`, {})
+    this.http.post<any>(`/api/students/${id}/reject`, {})
       .subscribe({
         next: () => {
           this.loadStudents();
@@ -580,7 +580,7 @@ export class AdminPanelComponent implements OnInit {
     if (!confirm('This will permanently delete the student record. Continue?')) {
       return;
     }
-    this.http.delete<any>(`http://localhost:8082/api/students/${id}`)
+    this.http.delete<any>(`/api/students/${id}`)
       .subscribe({
         next: () => {
           this.loadStudents();

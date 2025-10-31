@@ -14,7 +14,7 @@ export class NoticeComponent {
   isLoading = true;
 
   constructor(private http: HttpClient) {
-    this.http.get<any[]>('http://localhost:8082/api/notices')
+    this.http.get<any[]>('/api/notices')
       .subscribe({
         next: (data) => { this.notices = data || []; this.isLoading = false; },
         error: () => { this.isLoading = false; }

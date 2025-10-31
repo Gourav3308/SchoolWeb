@@ -44,7 +44,7 @@ export class HeaderComponent {
   }
 
   private loadActiveNotices() {
-    this.http.get<any[]>('http://localhost:8082/api/notices/active')
+    this.http.get<any[]>('/api/notices/active')
       .subscribe({ next: (data) => {
         // Show all active notices in the ticker
         this.notices = Array.isArray(data) ? data : [];

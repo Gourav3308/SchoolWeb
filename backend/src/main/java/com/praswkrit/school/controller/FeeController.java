@@ -20,7 +20,6 @@ import com.praswkrit.school.repository.FeeRepository;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:4200", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS })
 public class FeeController {
 
     @Autowired

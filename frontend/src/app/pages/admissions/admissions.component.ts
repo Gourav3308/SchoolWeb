@@ -57,7 +57,7 @@ export class AdmissionsComponent {
       this.isSubmitting = true;
       const formData = this.bookingForm.value;
 
-      this.http.post<any>('http://localhost:8082/api/students/register', formData)
+      this.http.post<any>('/api/students/register', formData)
         .subscribe({
           next: (response) => {
             this.isSubmitting = false;
