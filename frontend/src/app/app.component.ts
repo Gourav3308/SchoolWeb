@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { BackendKeepaliveService } from './core/backend-keepalive.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,13 @@ import { HeaderComponent } from './shared/header/header.component';
   `,
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'PRASWIKRIT KANYA MDHYA VIDYALAYA KOSHI SIWIR';
+  private keepaliveService = inject(BackendKeepaliveService);
+
+  ngOnInit(): void {
+    // Start backend keepalive service to prevent Render from sleeping
+    // This pings the backend every 2 minutes to keep it awake
+    this.keepaliveService.start();
+  }
 }
