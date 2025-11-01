@@ -27,8 +27,9 @@ export class AppComponent implements OnInit {
   private keepaliveService = inject(BackendKeepaliveService);
 
   ngOnInit(): void {
-    // Start backend keepalive service to prevent Render from sleeping
-    // This pings the backend every 2 minutes to keep it awake
+    // Start aggressive backend keepalive service to prevent Render from sleeping
+    // This sends burst pings on startup and pings every 30 seconds to keep backend awake
+    // No manual intervention needed - backend stays awake automatically
     this.keepaliveService.start();
   }
 }
